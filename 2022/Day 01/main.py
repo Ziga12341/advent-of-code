@@ -23,7 +23,7 @@ large_input: list[str] = read_lines(l)
 
 
 def sum_calories_and_get_max(file_name):
-    return sorted(sum(elf_calories) for elf_calories in read_lines(file_name))[-1]  # take the last one
+    return max(sum(elf_calories) for elf_calories in read_lines(file_name))  # use max instead sorted
 
 
 def sum_calories_from_top_3(file_name):
