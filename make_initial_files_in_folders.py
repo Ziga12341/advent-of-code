@@ -8,8 +8,8 @@ s = "small_input.txt"
 l = "input.txt"
 
 
-def read_lines(file: str) -> list:
-    with open(file, "r", encoding="utf-8") as file:
+def read_lines(file_name: str) -> list:
+    with open(file_name, "r", encoding="utf-8") as file:
         return [line.strip() for line in file]
 
 
@@ -17,10 +17,25 @@ small_input: list[str] = read_lines(s)
 large_input: list[str] = read_lines(l)
 
 
+def part_1(file_name):
+    ...
+
+
+def part_2(file_name):
+    ...
+
+
 class TestFunctions(unittest.TestCase):
     def setUp(self):
         self.small_input: list[str] = read_lines(s)
+        self.s = "small_input.txt"
+        self.l = "input.txt"
 
+    def test_part_1(self):
+        self.assertEqual(part_1(self.s), None)
+
+    def test_part_2(self):
+        self.assertEqual(part_2(self.s), None)
 '''
 
 for day in range(1, 26):
