@@ -17,8 +17,7 @@ def count_depth_increasing(file_name):
     counter = 0
     depth_measurement = read_lines(file_name)
     for first, second in zip(depth_measurement, depth_measurement[1:]):
-        if second - first > 0:
-            counter += 1
+        counter += second > first
     return counter
 
 
