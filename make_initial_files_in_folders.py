@@ -15,6 +15,7 @@ def read_lines(file_name: str) -> list:
 
 small_input: list[str] = read_lines(s)
 large_input: list[str] = read_lines(l)
+print(small_input)
 
 
 def part_1(file_name):
@@ -23,6 +24,10 @@ def part_1(file_name):
 
 def part_2(file_name):
     ...
+
+
+print("First part: ", part_1(l))
+print("Second part: ", part_2(l))
 
 
 class TestFunctions(unittest.TestCase):
