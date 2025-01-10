@@ -1,4 +1,5 @@
 import unittest
+from itertools import cycle
 
 s = "small_input.txt"
 l = "input.txt"
@@ -13,19 +14,16 @@ def read_lines(file_name: str) -> list:
             elif line.startswith("-"):
                 list_of_frequencies.append(-int(line[1:]))
 
-
         return list_of_frequencies
-
-
-small_input: list[str] = read_lines(s)
-large_input: list[str] = read_lines(l)
-print(large_input)
 
 
 def sum_frequencies(file_name):
     return sum(read_lines(file_name))
 
 
+# iterate over frequencies until counter added twice to vizited and return counter
+# pop value from the beginning and insert old one at the end
+# to use pop and append is not that efficient
 def frequency_reached_twice(file_name):
     vizited = set()
     counter = 0
@@ -39,6 +37,18 @@ def frequency_reached_twice(file_name):
         else:
             return counter
         frequencies.append(frequency)
+
+
+# solution using cycle
+def frequency_reached_twice(file_name):
+    vizited = set()
+    counter = 0
+    for frequency in cycle(read_lines(file_name)):
+        counter += frequency
+        if counter not in vizited:
+            vizited.add(counter)
+        else:
+            return counter
 
 
 print("First part: ", sum_frequencies(l))
@@ -55,4 +65,4 @@ class TestFunctions(unittest.TestCase):
         self.assertEqual(sum_frequencies(self.l), 525)
 
     def test_part_2(self):
-        self.assertEqual(frequency_reached_twice(self.s), None)
+        self.assertEqual(frequency_reached_twice(self.l), 75749)
