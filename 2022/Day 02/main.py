@@ -48,6 +48,23 @@ lose = {
     "C": "Y"
 }
 
+# dict for part 2
+rules_part_2 = {
+    # rock, rock
+    ("A", "X"): 3,
+    ("A", "Y"): 4,
+    ("A", "Z"): 8,
+    # paper, rock
+    ("B", "X"): 1,
+    ("B", "Y"): 5,
+    ("B", "Z"): 9,
+    # scissors, rock
+    ("C", "X"): 2,
+    ("C", "Y"): 6,
+    ("C", "Z"): 7,
+
+}
+
 
 def total_score_according_rules(file_name):
     return sum(rules[game] for game in read_lines(file_name))
@@ -69,6 +86,10 @@ def score_according_to_my_hand(file_name):
             my_hand = win[his_hand]
         counter += rules[(his_hand, my_hand)]
     return counter
+
+
+def score_according_to_my_hand(file_name):
+    return sum(rules_part_2[game] for game in read_lines(file_name))
 
 
 print("First part: ", total_score_according_rules(l))
