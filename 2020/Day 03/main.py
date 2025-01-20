@@ -18,35 +18,26 @@ def read_lines(file_name: str) -> list:
         return [line.strip() for line in file]
 
 
-def count_trees_three_right_one_down(file_name):
-    trees = 0
-    position_in_line = 0
-    grid = read_lines(file_name)
-    grid_wide = len(grid[0])
-    # do not start with the first line (start with the second)
-    for line in grid[1:]:
-        position_in_line += 3
-        # modulus operator, % (modulo) operator also called the remainder
-        # I use this because when end of line you need to add the whole grid on the right
-        trees += line[position_in_line % grid_wide] == "#"
-    return trees
-
-
 def count_trees_move_n_right_and_m_down(file_name, right=3, down=1):
     trees = 0
-    position_in_line = 0
     # take grid lines by step (if step 2 take each second line)
-    grid = read_lines(file_name)[::down]
-    # how "big" is grid in line (x-axis)
-    grid_wide = len(grid[0])
     # do not start with the first line (start with the second)
     # initialize down steps in lines
-    for line in grid[1:]:
-        position_in_line += right
+    for i, line in enumerate(read_lines(file_name)[::down]):
         # modulus operator, % (modulo) operator also called the remainder
         # I use this because when end of line you need to add the whole grid on the right
-        trees += line[position_in_line % grid_wide] == "#"
+        trees += line[i * right % len(line)] == "#"
     return trees
+
+
+# solution in one line for part one
+def count_trees_move_n_right_and_m_down(file_name, right=3, down=1):
+    # take grid lines by step (if step 2 take each second line)
+    # do not start with the first line (start with the second)
+    # initialize down steps in lines
+    # modulus operator, % (modulo) operator also called the remainder,
+    # I use this because when end of line you need to add the whole grid on the right
+    return sum(line[i * right % len(line)] == "#" for i, line in enumerate(read_lines(file_name)[::down]))
 
 
 def multiply_counted_trees_different_slopes_for_the_same_grid(file_name):
